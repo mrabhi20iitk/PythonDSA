@@ -78,6 +78,42 @@ class BinaryTreeNode:
             else:
                 return False
 
+    # finding the max value in tree
+    def findmax(self):
+        if self.right:
+            return self.right.findmax()
+        else:
+            return self.data
+
+    #finding the min value in sub tree
+    def findmin(self):
+        if self.left:
+            return self.left.findmin()
+        else:
+            return self.data
+
+    #deleting a node by right tree min method
+    def delete(self,val):
+        if val< self.data:
+            if self.left:
+                self.left = self.left.delete(val)
+        elif val > self.data:
+            if self.right:
+                self.right =  self.right.delete(val)
+        else:
+            if self.left is None and self.right is None:
+                return None
+            if self.left is None:
+                return self.right
+            if self.right is None:
+                return self.left
+
+            min_val = self.right.findmin()
+            self.data = min_val
+            self.right = self.right.delete(min_val)
+
+        return self
+
 
 def build_tree(elements):
     root = BinaryTreeNode(elements[0])
@@ -97,6 +133,10 @@ if __name__ == '__main__':
     print(b.post_order_traversal())
     print(b.search(20))
     print(b.search(21))
+    print(b.findmax())
+    print(b.findmin())
+    b.delete(9)
+    print(b.in_order_traversal())
 
 
 
