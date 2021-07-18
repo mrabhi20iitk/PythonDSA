@@ -1,2 +1,0 @@
-# PythonDSA
-DSA in Python
